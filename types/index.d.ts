@@ -49,6 +49,10 @@ export interface PickAndBetParams {
   strategy?: string | ((grids: Grid[], currentPrice: string) => Grid);
   commentary: string;
   templateContext?: Record<string, string>;
+  /** Time slot filter: 'next' (soonest), 'mid' (~60s), 'far' (latest), or slot index (0-based) */
+  timeSlot?: 'next' | 'mid' | 'far' | number;
+  /** Filter by seconds until expiry [minSec, maxSec]. Mutually exclusive with timeSlot. */
+  expiryRange?: [number, number];
 }
 
 export interface BetsParams {

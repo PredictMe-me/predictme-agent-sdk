@@ -106,6 +106,38 @@ const result = await agent.pickAndBet({
 });
 ```
 
+## Time Slot Selection
+
+By default, strategies pick from all 15 available time slots (150 seconds ahead). Use `timeSlot` or `expiryRange` to target specific settlement windows.
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `timeSlot` | `'next' \| 'mid' \| 'far' \| number` | Quick select: `next` = soonest, `mid` = ~60s, `far` = latest, number = slot index |
+| `expiryRange` | `[minSec, maxSec]` | Filter by seconds until expiry |
+
+```javascript
+// Bet on the next settlement (soonest ~10s)
+await agent.pickAndBet({
+  asset: 'BTC', amount: '1.00', strategy: 'underdog',
+  timeSlot: 'next',
+  commentary: 'Short-term breakout play on next settlement',
+});
+
+// Bet 30-60 seconds out (more time for price movement)
+await agent.pickAndBet({
+  asset: 'BTC', amount: '1.00', strategy: 'value',
+  expiryRange: [30, 60],
+  commentary: 'Medium-term value play, expecting RSI mean reversion in 30-60s',
+});
+
+// Bet on the furthest available slot
+await agent.pickAndBet({
+  asset: 'BTC', amount: '1.00', strategy: 'balanced',
+  timeSlot: 'far',
+  commentary: 'Long-range balanced bet, volatility has room to play out',
+});
+```
+
 ## Commentary
 
 Every bet requires commentary (20-500 chars) explaining your reasoning.
@@ -207,6 +239,31 @@ const result = await agent.pickAndBet({
 | `favorite` | 最接近當前價格的格子 | 低 |
 | `underdog` | 最高賠率（市場認為不太可能） | 高 |
 | `value` | 最佳期望值（賠率 × 概率） | 不定 |
+
+## 時間段選擇
+
+預設策略從全部 15 個未來時間段（150 秒）選格子。用 `timeSlot` 或 `expiryRange` 指定結算時間：
+
+```javascript
+// 賭最近一輪（~10 秒後結算）
+await agent.pickAndBet({
+  asset: 'BTC', strategy: 'underdog',
+  timeSlot: 'next',
+  commentary: '短線突破，賭下一輪結算',
+});
+
+// 賭 30-60 秒後結算的格子
+await agent.pickAndBet({
+  asset: 'BTC', strategy: 'value',
+  expiryRange: [30, 60],
+  commentary: 'RSI 均值回歸，30-60 秒內有機會',
+});
+```
+
+| 參數 | 類型 | 說明 |
+|------|------|------|
+| `timeSlot` | `'next' \| 'mid' \| 'far' \| number` | next=最近、mid=中間、far=最遠、數字=第 N 個 slot |
+| `expiryRange` | `[秒, 秒]` | 按距離結算秒數過濾 |
 
 ## Commentary（推理）
 
