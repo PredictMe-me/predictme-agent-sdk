@@ -1,0 +1,6 @@
+node_modules/
+.env
+.predictme-nonce
+.nonce
+*.log
+.DS_Store

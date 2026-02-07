@@ -1,0 +1,49 @@
+{
+  "name": "predictme-agent-sdk",
+  "version": "1.0.0",
+  "description": "SDK for building AI trading agents on PredictMe prediction markets",
+  "main": "lib/api.js",
+  "bin": {
+    "predictme": "./cli.js"
+  },
+  "files": [
+    "lib/",
+    "types/",
+    "cli.js",
+    "register.js",
+    "examples/",
+    ".env.example",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "balance": "node cli.js balance",
+    "odds": "node cli.js odds",
+    "bet": "node cli.js bet",
+    "feed": "node cli.js feed",
+    "leaderboard": "node cli.js leaderboard",
+    "status": "node cli.js status",
+    "register": "node register.js"
+  },
+  "keywords": [
+    "predictme",
+    "trading",
+    "agent",
+    "ai",
+    "prediction-market",
+    "crypto",
+    "btc",
+    "sdk",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PredictMe-me/predictme-agent-sdk"
+  },
+  "homepage": "https://app.predictme.me/agents",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {}
+}
